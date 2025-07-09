@@ -27,7 +27,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push linux/amd64 and linux/arc64
+      - name: Build and push linux/amd64 and linux/arm64
         uses: docker/build-push-action@v5
         with:
           context: .
