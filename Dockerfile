@@ -21,7 +21,7 @@ USER 1001
 
 # blank entrypoint to overwrite (and let CMD) the default entrypoint of 
 # ENTRYPOINT ["/app/entrypoint.sh"] #we can also do this in the future for more control
-ENTRYPOOINT [] 
+ENTRYPOINT [] 
 # Default command (can be overridden)
 CMD ["spark-submit", "--master", "local[*]", "/app/run_pipeline.py"]
 
