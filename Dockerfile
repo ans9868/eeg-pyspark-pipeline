@@ -12,6 +12,10 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 COPY ./src/ ./src/
 COPY ./run_pipeline.py .
 
+# make sure that the bitnami parts are writable for pyspark 
+RUN mkdir -p /opt/bitnami/spark/tmp && \
+    chmod -R 777 /opt/bitnami/spark/tmp
+
 # Switch back to Spark user (non-root)
 USER 1001
 
