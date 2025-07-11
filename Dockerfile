@@ -10,7 +10,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Copy your pipeline code
 COPY ./src/ ./src/
-COPY ./run_pipeline.py .
+COPY ./start-pipeline.py .
 
 # make sure that the bitnami parts are writable for pyspark 
 RUN mkdir -p /opt/bitnami/spark/tmp && \
