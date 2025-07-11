@@ -1,0 +1,30 @@
+project:
+  name: ''
+  output_dir: ./data
+  experiment_type: Classification
+  deployment_method: Docker
+  config_name: config_20250711_102624.yaml
+pyspark:
+  master: '4'
+  driver_memory: '6'
+  executor_memory: '6'
+  executor_cores: '2'
+  shuffle_partitions: '8'
+data_input:
+  groups: {}
+  reuse_expanded: 'Yes'
+  save_expanded: 'Yes'
+preprocessing:
+  bands: []
+  downsampling: null
+  artifact_removal: ICA
+feature_extraction:
+  method: Welch (default)
+  features:
+  - Band Power (averaged across all channels/bands)
+  - Band Power (per channel, averaged across bands)
+  - Band Power (averaged across channels, per band) *(not usually used)
+  - Band Power (per channel per band) *recommended
+feature_transformation:
+  transformations: PCA (retain 95% variance)
+  synthetic: None

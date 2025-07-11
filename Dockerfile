@@ -8,20 +8,21 @@ USER root
 COPY ./requirements/requirements.txt requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Copy your pipeline code
+# Copy your pipeline code and entrypoint
 COPY ./src/ ./src/
-COPY ./start-pipeline.py .
+COPY entrypoint.sh /entrypoint.sh
 
-# make sure that the bitnami parts are writable for pyspark 
+# Make sure required Spark directories are writable
 RUN mkdir -p /opt/bitnami/spark/tmp && \
-    chmod -R 777 /opt/bitnami/spark/tmp
+    chmod -R 777 /opt/bitnami/spark/tmp && \
+    chmod +x /entrypoint.sh
 
-# Switch back to Spark user (non-root)
+# Use non-root Spark user
 USER 1001
 
-# blank entrypoint to overwrite (and let CMD) the default entrypoint of 
-# ENTRYPOINT ["/app/entrypoint.sh"] #we can also do this in the future for more control
-ENTRYPOINT [] 
-# Default command (can be overridden)
-CMD ["spark-submit", "--master", "local[*]", "/app/run_pipeline.py"]
+# Set custom entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
+
+# Default command can be overridden
+CMD ["spark-submit", "--conf", "spark.jars.ivy=/tmp/.ivy2", "--master", "local[*]", "/app/src/digit_flatmap.py"]
 

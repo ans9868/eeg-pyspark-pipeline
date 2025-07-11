@@ -1,0 +1,25 @@
+project:
+  name: ''
+  output_dir: ./data
+  experiment_type: Classification
+  deployment_method: Docker
+  config_name: config_20250711_101915.yaml
+data_input:
+  groups: {}
+  reuse_expanded: 'Yes'
+  save_expanded: 'Yes'
+preprocessing:
+  bands:
+  - Delta
+  - Theta
+  - Alpha
+  - Beta
+  - Gamma
+  downsampling: null
+  artifact_removal: ICA
+feature_extraction:
+  method: Welch (default)
+  features: []
+feature_transformation:
+  transformations: PCA (retain 95% variance)
+  synthetic: None

@@ -7,8 +7,12 @@ def split_digits(n):
 
 if __name__ == "__main__":
     spark = SparkSession.builder.appName("DigitFlatMap").getOrCreate()
-    sc = spark.sparkContext
 
+    # Print Spark config
+    for item in spark.sparkContext.getConf().getAll():
+        print(f"[SPARK CONF] {item[0]} = {item[1]}")
+
+    sc = spark.sparkContext
     rdd = sc.parallelize(range(1, 1001))
     flat_digits = rdd.flatMap(split_digits)
 
@@ -18,3 +22,4 @@ if __name__ == "__main__":
     print("Github actions test x2")
 
     spark.stop()
+
